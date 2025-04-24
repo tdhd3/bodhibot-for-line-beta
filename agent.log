@@ -1,0 +1,269 @@
+2025-04-24 17:08:28,198 - __main__ - INFO - 启动开发服务器，端口: 8080，工作进程数: 8
+2025-04-24 17:08:28,198 - __main__ - INFO - 自动重载已启用，修改代码后服务器将自动重启
+2025-04-24 17:08:28,235 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8080
+ * Running on http://192.168.3.102:8080
+2025-04-24 17:08:28,235 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-04-24 17:08:28,236 - werkzeug - INFO -  * Restarting with stat
+2025-04-24 17:08:31,112 - __main__ - INFO - 启动开发服务器，端口: 8080，工作进程数: 8
+2025-04-24 17:08:31,112 - __main__ - INFO - 自动重载已启用，修改代码后服务器将自动重启
+2025-04-24 17:08:31,134 - werkzeug - WARNING -  * Debugger is active!
+2025-04-24 17:08:31,144 - werkzeug - INFO -  * Debugger PIN: 981-653-324
+2025-04-24 17:08:45,982 - app - INFO - 接收到 LINE Webhook 请求: {"destination":"Ud1dc43456be63edc025d9f36ce3ff1b2","events":[{"type":"message","message":{"type":"te...
+2025-04-24 17:08:45,985 - app - INFO - 收到用户 Ua80e30ea9eb079fa7402ca5505f11211 消息: 介紹佛法
+2025-04-24 17:08:45,987 - app - INFO - 对用户 Ua80e30ea9eb079fa7402ca5505f11211 的消息进行一般问答处理
+2025-04-24 17:08:45,987 - app - INFO - 为用户 Ua80e30ea9eb079fa7402ca5505f11211 创建新的agent
+2025-04-24 17:08:45,987 - agent - INFO - 為用戶 Ua80e30ea9eb079fa7402ca5505f11211 初始化 agent
+2025-04-24 17:08:46,005 - app - ERROR - 处理用户消息异常: "AgentExecutor" object has no field "run"
+Traceback (most recent call last):
+  File "/Users/hdscbdst/bodhibot-for-line-beta/app.py", line 288, in process_user_message
+    user_agents[user_id] = get_agent(OPENAI_API_KEY, user_id)
+  File "/Users/hdscbdst/bodhibot-for-line-beta/agent.py", line 164, in get_agent
+    agent.run = safe_run
+  File "pydantic/main.py", line 363, in pydantic.main.BaseModel.__setattr__
+ValueError: "AgentExecutor" object has no field "run"
+2025-04-24 17:08:46,013 - app - ERROR - 处理消息时出错: "AgentExecutor" object has no field "run"
+Traceback (most recent call last):
+  File "/Users/hdscbdst/bodhibot-for-line-beta/app.py", line 156, in handle_message
+    process_user_message(event, user_id, user_message)
+  File "/Users/hdscbdst/bodhibot-for-line-beta/app.py", line 288, in process_user_message
+    user_agents[user_id] = get_agent(OPENAI_API_KEY, user_id)
+  File "/Users/hdscbdst/bodhibot-for-line-beta/agent.py", line 164, in get_agent
+    agent.run = safe_run
+  File "pydantic/main.py", line 363, in pydantic.main.BaseModel.__setattr__
+ValueError: "AgentExecutor" object has no field "run"
+2025-04-24 17:08:46,192 - werkzeug - INFO - 127.0.0.1 - - [24/Apr/2025 17:08:46] "POST /webhook HTTP/1.1" 200 -
+2025-04-24 17:09:22,245 - werkzeug - INFO -  * Detected change in '/Users/hdscbdst/bodhibot-for-line-beta/agent.py', reloading
+2025-04-24 17:09:22,770 - werkzeug - INFO -  * Restarting with stat
+2025-04-24 17:09:26,240 - __main__ - INFO - 启动开发服务器，端口: 8080，工作进程数: 8
+2025-04-24 17:09:26,240 - __main__ - INFO - 自动重载已启用，修改代码后服务器将自动重启
+2025-04-24 17:09:26,268 - werkzeug - WARNING -  * Debugger is active!
+2025-04-24 17:09:26,277 - werkzeug - INFO -  * Debugger PIN: 981-653-324
+2025-04-24 17:09:40,943 - werkzeug - INFO -  * Detected change in '/Users/hdscbdst/bodhibot-for-line-beta/app.py', reloading
+2025-04-24 17:09:41,381 - werkzeug - INFO -  * Restarting with stat
+2025-04-24 17:09:44,680 - __main__ - INFO - 启动开发服务器，端口: 8080，工作进程数: 8
+2025-04-24 17:09:44,681 - __main__ - INFO - 自动重载已启用，修改代码后服务器将自动重启
+2025-04-24 17:09:44,706 - werkzeug - WARNING -  * Debugger is active!
+2025-04-24 17:09:44,715 - werkzeug - INFO -  * Debugger PIN: 981-653-324
+2025-04-24 17:10:28,502 - werkzeug - INFO -  * Detected change in '/Users/hdscbdst/bodhibot-for-line-beta/agent.py', reloading
+2025-04-24 17:10:29,077 - werkzeug - INFO -  * Restarting with stat
+2025-04-24 17:10:32,478 - __main__ - INFO - 启动开发服务器，端口: 8080，工作进程数: 8
+2025-04-24 17:10:32,478 - __main__ - INFO - 自动重载已启用，修改代码后服务器将自动重启
+2025-04-24 17:10:32,505 - werkzeug - WARNING -  * Debugger is active!
+2025-04-24 17:10:32,516 - werkzeug - INFO -  * Debugger PIN: 981-653-324
+2025-04-24 17:11:09,982 - werkzeug - INFO -  * Detected change in '/Users/hdscbdst/bodhibot-for-line-beta/app.py', reloading
+2025-04-24 17:11:10,497 - werkzeug - INFO -  * Restarting with stat
+2025-04-24 17:11:13,946 - __main__ - INFO - 启动开发服务器，端口: 8080，工作进程数: 8
+2025-04-24 17:11:13,946 - __main__ - INFO - 自动重载已启用，修改代码后服务器将自动重启
+2025-04-24 17:11:13,971 - werkzeug - WARNING -  * Debugger is active!
+2025-04-24 17:11:13,980 - werkzeug - INFO -  * Debugger PIN: 981-653-324
+2025-04-24 17:11:26,405 - werkzeug - INFO -  * Detected change in '/Users/hdscbdst/bodhibot-for-line-beta/dev.py', reloading
+2025-04-24 17:11:26,814 - werkzeug - INFO -  * Restarting with stat
+2025-04-24 17:11:29,827 - __main__ - INFO - 啟動開發服務器，端口: 8080，工作進程數: 8
+2025-04-24 17:11:29,827 - __main__ - INFO - 自動重載已啟用，修改代碼後服務器將自動重啟
+2025-04-24 17:11:29,850 - werkzeug - WARNING -  * Debugger is active!
+2025-04-24 17:11:29,858 - werkzeug - INFO -  * Debugger PIN: 981-653-324
+2025-04-24 17:11:43,393 - werkzeug - INFO -  * Detected change in '/Users/hdscbdst/bodhibot-for-line-beta/prod.py', reloading
+2025-04-24 17:11:43,815 - werkzeug - INFO -  * Restarting with stat
+2025-04-24 17:11:47,159 - __main__ - INFO - 啟動開發服務器，端口: 8080，工作進程數: 8
+2025-04-24 17:11:47,159 - __main__ - INFO - 自動重載已啟用，修改代碼後服務器將自動重啟
+2025-04-24 17:11:47,185 - werkzeug - WARNING -  * Debugger is active!
+2025-04-24 17:11:47,193 - werkzeug - INFO -  * Debugger PIN: 981-653-324
+2025-04-24 17:12:40,119 - werkzeug - INFO -  * Detected change in '/Users/hdscbdst/bodhibot-for-line-beta/agent.py', reloading
+2025-04-24 17:12:40,554 - werkzeug - INFO -  * Restarting with stat
+2025-04-24 17:12:43,799 - __main__ - INFO - 啟動開發服務器，端口: 8080，工作進程數: 8
+2025-04-24 17:12:43,799 - __main__ - INFO - 自動重載已啟用，修改代碼後服務器將自動重啟
+2025-04-24 17:12:43,824 - werkzeug - WARNING -  * Debugger is active!
+2025-04-24 17:12:43,834 - werkzeug - INFO -  * Debugger PIN: 981-653-324
+2025-04-24 17:12:59,553 - app - INFO - 接收到 LINE Webhook 請求: {"destination":"Ud1dc43456be63edc025d9f36ce3ff1b2","events":[{"type":"message","message":{"type":"te...
+2025-04-24 17:12:59,553 - app - INFO - 收到用戶 Ua80e30ea9eb079fa7402ca5505f11211 消息: 介紹佛法
+2025-04-24 17:12:59,555 - app - INFO - 對用戶 Ua80e30ea9eb079fa7402ca5505f11211 的消息進行一般問答處理
+2025-04-24 17:12:59,555 - app - INFO - 為用戶 Ua80e30ea9eb079fa7402ca5505f11211 創建新的agent
+2025-04-24 17:12:59,555 - agent - INFO - 為用戶 Ua80e30ea9eb079fa7402ca5505f11211 初始化 agent
+2025-04-24 17:12:59,566 - app - INFO - 調用agent處理: 介紹佛法
+2025-04-24 17:12:59,566 - agent - INFO - Agent處理用戶輸入: 介紹佛法
+2025-04-24 17:12:59,566 - agent - ERROR - Agent執行錯誤: Missing some input keys: {'chat_history'}
+Traceback (most recent call last):
+  File "/Users/hdscbdst/bodhibot-for-line-beta/agent.py", line 135, in safe_agent_runner
+    return agent({"input": user_input})["output"]
+  File "/Users/hdscbdst/bodhibot-for-line-beta/.venv/lib/python3.9/site-packages/langchain/chains/base.py", line 259, in __call__
+    inputs = self.prep_inputs(inputs)
+  File "/Users/hdscbdst/bodhibot-for-line-beta/.venv/lib/python3.9/site-packages/langchain/chains/base.py", line 413, in prep_inputs
+    self._validate_inputs(inputs)
+  File "/Users/hdscbdst/bodhibot-for-line-beta/.venv/lib/python3.9/site-packages/langchain/chains/base.py", line 171, in _validate_inputs
+    raise ValueError(f"Missing some input keys: {missing_keys}")
+ValueError: Missing some input keys: {'chat_history'}
+2025-04-24 17:12:59,570 - app - INFO - Agent響應成功，響應長度: 75
+2025-04-24 17:12:59,775 - werkzeug - INFO - 127.0.0.1 - - [24/Apr/2025 17:12:59] "POST /webhook HTTP/1.1" 200 -
+2025-04-24 17:13:45,474 - werkzeug - INFO -  * Detected change in '/Users/hdscbdst/bodhibot-for-line-beta/agent.py', reloading
+2025-04-24 17:13:45,953 - werkzeug - INFO -  * Restarting with stat
+2025-04-24 17:13:49,401 - __main__ - INFO - 啟動開發服務器，端口: 8080，工作進程數: 8
+2025-04-24 17:13:49,401 - __main__ - INFO - 自動重載已啟用，修改代碼後服務器將自動重啟
+2025-04-24 17:13:49,429 - werkzeug - WARNING -  * Debugger is active!
+2025-04-24 17:13:49,438 - werkzeug - INFO -  * Debugger PIN: 981-653-324
+2025-04-24 17:14:05,039 - werkzeug - INFO -  * Detected change in '/Users/hdscbdst/bodhibot-for-line-beta/app.py', reloading
+2025-04-24 17:14:05,464 - werkzeug - INFO -  * Restarting with stat
+2025-04-24 17:14:08,868 - __main__ - INFO - 啟動開發服務器，端口: 8080，工作進程數: 8
+2025-04-24 17:14:08,868 - __main__ - INFO - 自動重載已啟用，修改代碼後服務器將自動重啟
+2025-04-24 17:14:08,897 - werkzeug - WARNING -  * Debugger is active!
+2025-04-24 17:14:08,906 - werkzeug - INFO -  * Debugger PIN: 981-653-324
+2025-04-24 17:14:34,835 - werkzeug - INFO -  * Detected change in '/Users/hdscbdst/bodhibot-for-line-beta/agent.py', reloading
+2025-04-24 17:14:35,400 - werkzeug - INFO -  * Restarting with stat
+2025-04-24 17:14:38,809 - __main__ - INFO - 啟動開發服務器，端口: 8080，工作進程數: 8
+2025-04-24 17:14:38,809 - __main__ - INFO - 自動重載已啟用，修改代碼後服務器將自動重啟
+2025-04-24 17:14:38,836 - werkzeug - WARNING -  * Debugger is active!
+2025-04-24 17:14:38,846 - werkzeug - INFO -  * Debugger PIN: 981-653-324
+2025-04-24 17:14:50,016 - app - INFO - 接收到 LINE Webhook 請求: {"destination":"Ud1dc43456be63edc025d9f36ce3ff1b2","events":[{"type":"message","message":{"type":"te...
+2025-04-24 17:14:50,018 - app - INFO - 收到用戶 Ua80e30ea9eb079fa7402ca5505f11211 消息: 介紹佛教核心價值
+2025-04-24 17:14:50,020 - app - INFO - 對用戶 Ua80e30ea9eb079fa7402ca5505f11211 的消息進行一般問答處理
+2025-04-24 17:14:50,020 - app - INFO - 為用戶 Ua80e30ea9eb079fa7402ca5505f11211 創建新的agent
+2025-04-24 17:14:50,020 - agent - INFO - 為用戶 Ua80e30ea9eb079fa7402ca5505f11211 初始化 agent
+2025-04-24 17:14:50,035 - app - INFO - 調用agent處理: 介紹佛教核心價值
+2025-04-24 17:14:50,035 - agent - INFO - Agent處理用戶輸入: {'input': '介紹佛教核心價值', 'chat_history': []}
+2025-04-24 17:14:51,967 - agent - ERROR - Agent執行錯誤: One input key expected got ['input', 'chat_history']
+Traceback (most recent call last):
+  File "/Users/hdscbdst/bodhibot-for-line-beta/agent.py", line 144, in safe_agent_runner
+    return agent(inputs)["output"]
+  File "/Users/hdscbdst/bodhibot-for-line-beta/.venv/lib/python3.9/site-packages/langchain/chains/base.py", line 284, in __call__
+    final_outputs: Dict[str, Any] = self.prep_outputs(
+  File "/Users/hdscbdst/bodhibot-for-line-beta/.venv/lib/python3.9/site-packages/langchain/chains/base.py", line 378, in prep_outputs
+    self.memory.save_context(inputs, outputs)
+  File "/Users/hdscbdst/bodhibot-for-line-beta/.venv/lib/python3.9/site-packages/langchain/memory/chat_memory.py", line 35, in save_context
+    input_str, output_str = self._get_input_output(inputs, outputs)
+  File "/Users/hdscbdst/bodhibot-for-line-beta/.venv/lib/python3.9/site-packages/langchain/memory/chat_memory.py", line 22, in _get_input_output
+    prompt_input_key = get_prompt_input_key(inputs, self.memory_variables)
+  File "/Users/hdscbdst/bodhibot-for-line-beta/.venv/lib/python3.9/site-packages/langchain/memory/utils.py", line 21, in get_prompt_input_key
+    raise ValueError(f"One input key expected got {prompt_input_keys}")
+ValueError: One input key expected got ['input', 'chat_history']
+2025-04-24 17:14:51,986 - app - INFO - Agent響應成功，響應長度: 29
+2025-04-24 17:14:52,219 - werkzeug - INFO - 127.0.0.1 - - [24/Apr/2025 17:14:52] "POST /webhook HTTP/1.1" 200 -
+2025-04-24 17:15:51,985 - app - INFO - 接收到 LINE Webhook 請求: {"destination":"Ud1dc43456be63edc025d9f36ce3ff1b2","events":[{"type":"message","message":{"type":"te...
+2025-04-24 17:15:51,987 - app - INFO - 收到用戶 Ua80e30ea9eb079fa7402ca5505f11211 消息: 介紹佛教核心價值
+2025-04-24 17:15:51,988 - app - INFO - 對用戶 Ua80e30ea9eb079fa7402ca5505f11211 的消息進行一般問答處理
+2025-04-24 17:15:51,989 - app - INFO - 調用agent處理: 介紹佛教核心價值
+2025-04-24 17:15:51,989 - agent - INFO - Agent處理用戶輸入: {'input': '介紹佛教核心價值', 'chat_history': [('介紹佛教核心價值', '很抱歉，系統無法完成您的請求。請稍後再試，或換個方式提問。')]}
+2025-04-24 17:15:51,990 - agent - ERROR - Agent執行錯誤: variable chat_history should be a list of base messages, got [('介紹佛教核心價值', '很抱歉，系統無法完成您的請求。請稍後再試，或換個方式提問。')]
+Traceback (most recent call last):
+  File "/Users/hdscbdst/bodhibot-for-line-beta/agent.py", line 144, in safe_agent_runner
+    return agent(inputs)["output"]
+  File "/Users/hdscbdst/bodhibot-for-line-beta/.venv/lib/python3.9/site-packages/langchain/chains/base.py", line 282, in __call__
+    raise e
+  File "/Users/hdscbdst/bodhibot-for-line-beta/.venv/lib/python3.9/site-packages/langchain/chains/base.py", line 276, in __call__
+    self._call(inputs, run_manager=run_manager)
+  File "/Users/hdscbdst/bodhibot-for-line-beta/.venv/lib/python3.9/site-packages/langchain/agents/agent.py", line 1036, in _call
+    next_step_output = self._take_next_step(
+  File "/Users/hdscbdst/bodhibot-for-line-beta/.venv/lib/python3.9/site-packages/langchain/agents/agent.py", line 833, in _take_next_step
+    output = self.agent.plan(
+  File "/Users/hdscbdst/bodhibot-for-line-beta/.venv/lib/python3.9/site-packages/langchain/agents/agent.py", line 456, in plan
+    full_output = self.llm_chain.predict(callbacks=callbacks, **full_inputs)
+  File "/Users/hdscbdst/bodhibot-for-line-beta/.venv/lib/python3.9/site-packages/langchain/chains/llm.py", line 255, in predict
+    return self(kwargs, callbacks=callbacks)[self.output_key]
+  File "/Users/hdscbdst/bodhibot-for-line-beta/.venv/lib/python3.9/site-packages/langchain/chains/base.py", line 282, in __call__
+    raise e
+  File "/Users/hdscbdst/bodhibot-for-line-beta/.venv/lib/python3.9/site-packages/langchain/chains/base.py", line 276, in __call__
+    self._call(inputs, run_manager=run_manager)
+  File "/Users/hdscbdst/bodhibot-for-line-beta/.venv/lib/python3.9/site-packages/langchain/chains/llm.py", line 91, in _call
+    response = self.generate([inputs], run_manager=run_manager)
+  File "/Users/hdscbdst/bodhibot-for-line-beta/.venv/lib/python3.9/site-packages/langchain/chains/llm.py", line 100, in generate
+    prompts, stop = self.prep_prompts(input_list, run_manager=run_manager)
+  File "/Users/hdscbdst/bodhibot-for-line-beta/.venv/lib/python3.9/site-packages/langchain/chains/llm.py", line 136, in prep_prompts
+    prompt = self.prompt.format_prompt(**selected_inputs)
+  File "/Users/hdscbdst/bodhibot-for-line-beta/.venv/lib/python3.9/site-packages/langchain/prompts/chat.py", line 322, in format_prompt
+    messages = self.format_messages(**kwargs)
+  File "/Users/hdscbdst/bodhibot-for-line-beta/.venv/lib/python3.9/site-packages/langchain/prompts/chat.py", line 564, in format_messages
+    message = message_template.format_messages(**rel_params)
+  File "/Users/hdscbdst/bodhibot-for-line-beta/.venv/lib/python3.9/site-packages/langchain/prompts/chat.py", line 106, in format_messages
+    raise ValueError(
+ValueError: variable chat_history should be a list of base messages, got [('介紹佛教核心價值', '很抱歉，系統無法完成您的請求。請稍後再試，或換個方式提問。')]
+2025-04-24 17:15:52,002 - app - INFO - Agent響應成功，響應長度: 29
+2025-04-24 17:15:52,131 - app - ERROR - 處理用戶消息異常: (400)
+Reason: Bad Request
+HTTP response headers: HTTPHeaderDict({'Server': 'legy', 'Content-Type': 'application/json', 'x-content-type-options': 'nosniff', 'x-frame-options': 'DENY', 'x-line-request-id': '09c73272-67f2-4194-a6f7-49d851d2e238', 'x-xss-protection': '1; mode=block', 'Content-Length': '33', 'Expires': 'Thu, 24 Apr 2025 09:15:52 GMT', 'Cache-Control': 'max-age=0, no-cache, no-store', 'Pragma': 'no-cache', 'Date': 'Thu, 24 Apr 2025 09:15:52 GMT', 'Connection': 'close'})
+HTTP response body: {"message":"Invalid reply token"}
+Traceback (most recent call last):
+  File "/Users/hdscbdst/bodhibot-for-line-beta/app.py", line 342, in process_user_message
+    line_bot_api.reply_message(request)
+  File "pydantic/decorator.py", line 40, in pydantic.decorator.validate_arguments.validate.wrapper_function
+  File "pydantic/decorator.py", line 134, in pydantic.decorator.ValidatedFunction.call
+  File "pydantic/decorator.py", line 206, in pydantic.decorator.ValidatedFunction.execute
+  File "/Users/hdscbdst/bodhibot-for-line-beta/.venv/lib/python3.9/site-packages/linebot/v3/messaging/api/messaging_api.py", line 6544, in reply_message
+    return self.reply_message_with_http_info(reply_message_request, **kwargs)  # noqa: E501
+  File "pydantic/decorator.py", line 40, in pydantic.decorator.validate_arguments.validate.wrapper_function
+  File "pydantic/decorator.py", line 134, in pydantic.decorator.ValidatedFunction.call
+  File "pydantic/decorator.py", line 206, in pydantic.decorator.ValidatedFunction.execute
+  File "/Users/hdscbdst/bodhibot-for-line-beta/.venv/lib/python3.9/site-packages/linebot/v3/messaging/api/messaging_api.py", line 6644, in reply_message_with_http_info
+    return self.api_client.call_api(
+  File "/Users/hdscbdst/bodhibot-for-line-beta/.venv/lib/python3.9/site-packages/linebot/v3/messaging/api_client.py", line 407, in call_api
+    return self.__call_api(resource_path, method,
+  File "/Users/hdscbdst/bodhibot-for-line-beta/.venv/lib/python3.9/site-packages/linebot/v3/messaging/api_client.py", line 222, in __call_api
+    raise e
+  File "/Users/hdscbdst/bodhibot-for-line-beta/.venv/lib/python3.9/site-packages/linebot/v3/messaging/api_client.py", line 212, in __call_api
+    response_data = self.request(
+  File "/Users/hdscbdst/bodhibot-for-line-beta/.venv/lib/python3.9/site-packages/linebot/v3/messaging/api_client.py", line 451, in request
+    return self.rest_client.post_request(url,
+  File "/Users/hdscbdst/bodhibot-for-line-beta/.venv/lib/python3.9/site-packages/linebot/v3/messaging/rest.py", line 270, in post_request
+    return self.request("POST", url,
+  File "/Users/hdscbdst/bodhibot-for-line-beta/.venv/lib/python3.9/site-packages/linebot/v3/messaging/rest.py", line 229, in request
+    raise ApiException(http_resp=r)
+linebot.v3.messaging.exceptions.ApiException: (400)
+Reason: Bad Request
+HTTP response headers: HTTPHeaderDict({'Server': 'legy', 'Content-Type': 'application/json', 'x-content-type-options': 'nosniff', 'x-frame-options': 'DENY', 'x-line-request-id': '09c73272-67f2-4194-a6f7-49d851d2e238', 'x-xss-protection': '1; mode=block', 'Content-Length': '33', 'Expires': 'Thu, 24 Apr 2025 09:15:52 GMT', 'Cache-Control': 'max-age=0, no-cache, no-store', 'Pragma': 'no-cache', 'Date': 'Thu, 24 Apr 2025 09:15:52 GMT', 'Connection': 'close'})
+HTTP response body: {"message":"Invalid reply token"}
+
+2025-04-24 17:15:52,166 - app - ERROR - 處理消息時出錯: (400)
+Reason: Bad Request
+HTTP response headers: HTTPHeaderDict({'Server': 'legy', 'Content-Type': 'application/json', 'x-content-type-options': 'nosniff', 'x-frame-options': 'DENY', 'x-line-request-id': '09c73272-67f2-4194-a6f7-49d851d2e238', 'x-xss-protection': '1; mode=block', 'Content-Length': '33', 'Expires': 'Thu, 24 Apr 2025 09:15:52 GMT', 'Cache-Control': 'max-age=0, no-cache, no-store', 'Pragma': 'no-cache', 'Date': 'Thu, 24 Apr 2025 09:15:52 GMT', 'Connection': 'close'})
+HTTP response body: {"message":"Invalid reply token"}
+Traceback (most recent call last):
+  File "/Users/hdscbdst/bodhibot-for-line-beta/app.py", line 157, in handle_message
+    process_user_message(event, user_id, user_message)
+  File "/Users/hdscbdst/bodhibot-for-line-beta/app.py", line 342, in process_user_message
+    line_bot_api.reply_message(request)
+  File "pydantic/decorator.py", line 40, in pydantic.decorator.validate_arguments.validate.wrapper_function
+  File "pydantic/decorator.py", line 134, in pydantic.decorator.ValidatedFunction.call
+  File "pydantic/decorator.py", line 206, in pydantic.decorator.ValidatedFunction.execute
+  File "/Users/hdscbdst/bodhibot-for-line-beta/.venv/lib/python3.9/site-packages/linebot/v3/messaging/api/messaging_api.py", line 6544, in reply_message
+    return self.reply_message_with_http_info(reply_message_request, **kwargs)  # noqa: E501
+  File "pydantic/decorator.py", line 40, in pydantic.decorator.validate_arguments.validate.wrapper_function
+  File "pydantic/decorator.py", line 134, in pydantic.decorator.ValidatedFunction.call
+  File "pydantic/decorator.py", line 206, in pydantic.decorator.ValidatedFunction.execute
+  File "/Users/hdscbdst/bodhibot-for-line-beta/.venv/lib/python3.9/site-packages/linebot/v3/messaging/api/messaging_api.py", line 6644, in reply_message_with_http_info
+    return self.api_client.call_api(
+  File "/Users/hdscbdst/bodhibot-for-line-beta/.venv/lib/python3.9/site-packages/linebot/v3/messaging/api_client.py", line 407, in call_api
+    return self.__call_api(resource_path, method,
+  File "/Users/hdscbdst/bodhibot-for-line-beta/.venv/lib/python3.9/site-packages/linebot/v3/messaging/api_client.py", line 222, in __call_api
+    raise e
+  File "/Users/hdscbdst/bodhibot-for-line-beta/.venv/lib/python3.9/site-packages/linebot/v3/messaging/api_client.py", line 212, in __call_api
+    response_data = self.request(
+  File "/Users/hdscbdst/bodhibot-for-line-beta/.venv/lib/python3.9/site-packages/linebot/v3/messaging/api_client.py", line 451, in request
+    return self.rest_client.post_request(url,
+  File "/Users/hdscbdst/bodhibot-for-line-beta/.venv/lib/python3.9/site-packages/linebot/v3/messaging/rest.py", line 270, in post_request
+    return self.request("POST", url,
+  File "/Users/hdscbdst/bodhibot-for-line-beta/.venv/lib/python3.9/site-packages/linebot/v3/messaging/rest.py", line 229, in request
+    raise ApiException(http_resp=r)
+linebot.v3.messaging.exceptions.ApiException: (400)
+Reason: Bad Request
+HTTP response headers: HTTPHeaderDict({'Server': 'legy', 'Content-Type': 'application/json', 'x-content-type-options': 'nosniff', 'x-frame-options': 'DENY', 'x-line-request-id': '09c73272-67f2-4194-a6f7-49d851d2e238', 'x-xss-protection': '1; mode=block', 'Content-Length': '33', 'Expires': 'Thu, 24 Apr 2025 09:15:52 GMT', 'Cache-Control': 'max-age=0, no-cache, no-store', 'Pragma': 'no-cache', 'Date': 'Thu, 24 Apr 2025 09:15:52 GMT', 'Connection': 'close'})
+HTTP response body: {"message":"Invalid reply token"}
+
+2025-04-24 17:15:52,379 - app - ERROR - 發送錯誤消息失敗: (400)
+Reason: Bad Request
+HTTP response headers: HTTPHeaderDict({'Server': 'legy', 'Content-Type': 'application/json', 'x-content-type-options': 'nosniff', 'x-frame-options': 'DENY', 'x-line-request-id': '606ccc49-3eb8-4e1d-afe6-b91d5447ef90', 'x-xss-protection': '1; mode=block', 'Content-Length': '33', 'Expires': 'Thu, 24 Apr 2025 09:15:52 GMT', 'Cache-Control': 'max-age=0, no-cache, no-store', 'Pragma': 'no-cache', 'Date': 'Thu, 24 Apr 2025 09:15:52 GMT', 'Connection': 'close'})
+HTTP response body: {"message":"Invalid reply token"}
+
+2025-04-24 17:15:52,381 - werkzeug - INFO - 127.0.0.1 - - [24/Apr/2025 17:15:52] "POST /webhook HTTP/1.1" 200 -
+2025-04-24 17:16:46,229 - werkzeug - INFO -  * Detected change in '/Users/hdscbdst/bodhibot-for-line-beta/agent.py', reloading
+2025-04-24 17:16:46,710 - werkzeug - INFO -  * Restarting with stat
+2025-04-24 17:16:50,126 - __main__ - INFO - 啟動開發服務器，端口: 8080，工作進程數: 8
+2025-04-24 17:16:50,126 - __main__ - INFO - 自動重載已啟用，修改代碼後服務器將自動重啟
+2025-04-24 17:16:50,153 - werkzeug - WARNING -  * Debugger is active!
+2025-04-24 17:16:50,166 - werkzeug - INFO -  * Debugger PIN: 981-653-324
+2025-04-24 17:17:49,703 - werkzeug - INFO -  * Detected change in '/Users/hdscbdst/bodhibot-for-line-beta/app.py', reloading
+2025-04-24 17:17:50,173 - werkzeug - INFO -  * Restarting with stat
+2025-04-24 17:17:53,581 - __main__ - INFO - 啟動開發服務器，端口: 8080，工作進程數: 8
+2025-04-24 17:17:53,581 - __main__ - INFO - 自動重載已啟用，修改代碼後服務器將自動重啟
+2025-04-24 17:17:53,608 - werkzeug - WARNING -  * Debugger is active!
+2025-04-24 17:17:53,619 - werkzeug - INFO -  * Debugger PIN: 981-653-324
+2025-04-24 17:18:48,891 - werkzeug - INFO -  * Detected change in '/Users/hdscbdst/bodhibot-for-line-beta/agent.py', reloading
+2025-04-24 17:18:49,437 - werkzeug - INFO -  * Restarting with stat

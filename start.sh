@@ -39,9 +39,11 @@ sleep 3
 # 启动ngrok (如果安装了)
 if command -v ngrok &> /dev/null; then
     echo "启动ngrok..."
-    ngrok http 5000
+    echo "获取ngrok URL后，请在LINE Developers控制台中设置Webhook URL: https://[ngrok-domain]/webhook"
+    ngrok http 8080
 else
-    echo "未找到ngrok，请安装后手动启动: ngrok http 5000"
+    echo "未找到ngrok，请安装后手动启动: ngrok http 8080"
+    echo "获取ngrok URL后，请在LINE Developers控制台中设置Webhook URL: https://[ngrok-domain]/webhook"
 fi
 
 # 当ngrok停止时，关闭Flask应用

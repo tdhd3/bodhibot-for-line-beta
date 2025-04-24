@@ -28,8 +28,9 @@ if not exist ".env" (
 )
 
 REM 啟動Flask應用
-echo 啟動Flask應用...
-start "" python app.py
+echo 正在启动应用...
+start "Flask App" cmd /k python app.py
+echo 获取ngrok URL后，请在LINE Developers控制台中设置Webhook URL: https://[ngrok-domain]/webhook
 
 REM 等待Flask啟動
 echo 等待Flask啟動...
@@ -38,10 +39,10 @@ timeout /t 3 /nobreak > nul
 REM 啟動ngrok（如果安裝了）
 where ngrok > nul 2>&1
 if %ERRORLEVEL% == 0 (
-    echo 啟動ngrok...
-    ngrok http 5000
+    echo 正在启动ngrok...
+    ngrok http 8080
 ) else (
-    echo 未找到ngrok，請安裝後手動啟動: ngrok http 5000
+    echo 未找到ngrok，請安裝後手動啟動: ngrok http 8080
     REM 保持窗口打開
     pause
 )

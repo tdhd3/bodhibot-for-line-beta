@@ -15,7 +15,8 @@ USER_CONTEXT_TEMPLATE = {
     "questions": [],
     "mentions": [],
     "interactions_count": 0,
-    "preferred_gates": []
+    "preferred_gates": [],
+    "chat_history": []  # 添加聊天历史记录列表
 }
 
 # 內存中的用戶上下文緩存
@@ -118,6 +119,44 @@ def add_user_question(user_id: str, question: str) -> Dict:
     
     return context
 
+def add_to_chat_history(user_id: str, user_message: str, bot_response: str) -> Dict:
+    """添加对话到聊天历史记录"""
+    context = get_user_context(user_id)
+    
+    # 确保聊天历史记录字段存在
+    if "chat_history" not in context:
+        context["chat_history"] = []
+    
+    # 创建新的对话记录
+    chat_entry = {
+        "timestamp": int(time.time()),
+        "user_message": user_message,
+        "bot_response": bot_response
+    }
+    
+    # 添加到历史记录
+    context["chat_history"].append(chat_entry)
+    
+    # 只保留最近的5条对话
+    if len(context["chat_history"]) > 5:
+        context["chat_history"] = context["chat_history"][-5:]
+    
+    # 保存更新
+    save_user_context(user_id)
+    
+    return context
+
+def get_chat_history(user_id: str, count: int = 5) -> List[Dict]:
+    """获取用户最近的聊天历史记录"""
+    context = get_user_context(user_id)
+    
+    # 如果没有聊天历史记录，返回空列表
+    if "chat_history" not in context:
+        return []
+    
+    # 返回最近的count条记录
+    return context["chat_history"][-count:]
+
 def extract_mentions_from_text(user_id: str, text: str) -> List[str]:
     """從文本中提取提及的關鍵詞"""
     context = get_user_context(user_id)
@@ -203,4 +242,21 @@ def get_user_background(user_id: str) -> str:
 def get_preferred_gates(user_id: str) -> List[str]:
     """獲取用戶偏好的修行方法"""
     context = get_user_context(user_id)
-    return context.get("preferred_gates", []) 
+    return context.get("preferred_gates", [])
+
+def get_recent_messages_for_context(user_id: str) -> str:
+    """获取用户最近的对话记录，格式化为上下文字符串"""
+    recent_chats = get_chat_history(user_id)
+    
+    if not recent_chats:
+        return ""
+    
+    context_str = "最近的对话记录：\n"
+    
+    for i, chat in enumerate(recent_chats):
+        context_str += f"用户: {chat['user_message']}\n"
+        context_str += f"机器人: {chat['bot_response']}\n"
+        if i < len(recent_chats) - 1:
+            context_str += "\n"
+    
+    return context_str 

@@ -6,12 +6,7 @@ from datetime import datetime
 from typing import List, Dict, Optional, Union
 from agent import get_agent
 
-# 使用可靠的非中資新聞源
-# NewsAPI 是美國公司運營的API服務
-NEWS_API_URL = "https://newsapi.org/v2/top-headlines"
-NEWS_API_KEY = os.getenv('NEWS_API_KEY')
-
-# 其他非中資新聞API選項
+# 只保留GNews API
 GNEWS_API_URL = "https://gnews.io/api/v4/top-headlines"
 GNEWS_API_KEY = os.getenv('GNEWS_API_KEY')
 
@@ -149,43 +144,8 @@ def get_news_by_rss(category: str = None, count: int = 10) -> List[Dict]:
     
     return articles
 
-def get_news_by_newsapi(category: str = None, country: str = 'tw', count: int = 10) -> List[Dict]:
-    """使用 NewsAPI 獲取最新新聞"""
-    try:
-        params = {
-            'apiKey': NEWS_API_KEY,
-            'pageSize': count
-        }
-        
-        # 根據分類調整請求參數
-        if category and category.lower() in ["politics", "political"]:
-            params['category'] = 'politics'
-        elif category and category.lower() in ["economics", "business", "economy"]:
-            params['category'] = 'business'
-        elif category and category.lower() in ["culture", "entertainment"]:
-            params['category'] = 'entertainment'
-            
-        # 決定國際或台灣新聞
-        if country and country.lower() in ['tw', 'taiwan']:
-            params['country'] = 'tw'
-        elif country and country.lower() in ['international', 'world', 'global']:
-            # 國際新聞可以混合多個國家
-            params['country'] = 'us,gb,jp'
-            
-        response = requests.get(
-            NEWS_API_URL,
-            params=params
-        )
-        
-        if response.status_code == 200:
-            return filter_news_articles(response.json().get('articles', []))
-        return []
-    except Exception as e:
-        print(f"獲取新聞失敗 (NewsAPI): {e}")
-        return []
-
 def get_news_by_gnews(category: str = None, country: str = 'tw', count: int = 10) -> List[Dict]:
-    """使用 GNews API 獲取最新新聞（備用）"""
+    """使用 GNews API 獲取最新新聞"""
     try:
         params = {
             'token': GNEWS_API_KEY,
@@ -262,17 +222,7 @@ def get_news_options(category: str = None, country: str = None) -> List[Dict]:
     # 首先嘗試從RSS源獲取新聞
     articles = get_news_by_rss(category)
     
-    # 如果RSS源獲取失敗或數量不足，嘗試 NewsAPI
-    if len(articles) < 3:
-        newsapi_articles = get_news_by_newsapi(category, country)
-        # 合併並去重
-        seen_titles = {a.get('title') for a in articles}
-        for article in newsapi_articles:
-            if article.get('title') not in seen_titles:
-                articles.append(article)
-                seen_titles.add(article.get('title'))
-    
-    # 如果還是不夠，再嘗試 GNews
+    # 如果RSS源獲取失敗或數量不足，嘗試 GNews
     if len(articles) < 3:
         gnews_articles = get_news_by_gnews(category, country)
         # 合併並去重

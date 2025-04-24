@@ -52,12 +52,12 @@ python app.py
 
 2. 使用ngrok進行隧道測試（開發環境）
 ```
-ngrok http 5000
+ngrok http 8080
 ```
 
 3. 將ngrok生成的URL設置為LINE Bot的Webhook URL
 ```
-https://xxx.ngrok-free.app/callback
+https://xxx.ngrok-free.app/webhook
 ```
 
 ## 使用LINE Bot的方式

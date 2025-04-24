@@ -1,27 +1,59 @@
-from langchain.chat_models import ChatOpenAI
-from langchain.agents import initialize_agent, Tool
-from langchain.memory import ConversationBufferMemory
-from langchain.prompts import SystemMessagePromptTemplate, ChatPromptTemplate, MessagesPlaceholder
-from cbeta_tool import CBETASearcher
 import os
+import json
+import logging
+import sys
+import time
+import traceback
+from typing import Optional
+from dotenv import load_dotenv
+from langchain_openai import ChatOpenAI
+from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
+from langchain_core.messages import HumanMessage, AIMessage
+from langchain.tools import BaseTool, Tool
+from langchain.agents import AgentExecutor, create_openai_tools_agent
+from langchain.memory import ConversationBufferMemory, ChatMessageHistory
+from cbeta_tool import CBETASearcher
+from cbeta_retrieval import CBETARetriever
+from user_context import get_user_context, get_recent_messages_for_context
+
+# 配置日志
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler("agent.log"),
+        logging.StreamHandler(sys.stdout)
+    ]
+)
+logger = logging.getLogger("agent")
 
 # 載入 CBETA 工具
 cbeta_searcher = CBETASearcher()
 
+# 用户聊天历史
+user_memories = {}
+
 def cbeta_tool_func(query: str) -> str:
-    results = cbeta_searcher.search(query, return_full_paragraph=True)
-    if not results:
-        return "未找到相關經文。"
-    
-    formatted_results = []
-    for doc in results:
-        # 原文完整段落
-        full_paragraph = doc['content']
-        # 引用信息
-        reference = cbeta_searcher.format_cbeta_reference(doc)
-        formatted_results.append(f"【原文】\n{full_paragraph}\n\n【來源】\n{reference}")
-    
-    return "\n\n---\n\n".join(formatted_results)
+    try:
+        logger.info(f"CBETA搜索: {query}")
+        results = cbeta_searcher.search(query, return_full_paragraph=True)
+        if not results:
+            logger.info("CBETA搜索: 未找到相關經文")
+            return "未找到相關經文。"
+        
+        formatted_results = []
+        for doc in results:
+            # 原文完整段落
+            full_paragraph = doc['content']
+            # 引用信息
+            reference = cbeta_searcher.format_cbeta_reference(doc)
+            formatted_results.append(f"【原文】\n{full_paragraph}\n\n【來源】\n{reference}")
+        
+        logger.info(f"CBETA搜索: 找到 {len(results)} 條結果")
+        return "\n\n---\n\n".join(formatted_results)
+    except Exception as e:
+        logger.error(f"CBETA搜索錯誤: {str(e)}", exc_info=True)
+        return f"檢索經文時發生錯誤: {str(e)}"
 
 cbeta_tool = Tool(
     name="CBETA經文檢索",
@@ -29,38 +61,83 @@ cbeta_tool = Tool(
     description="根據用戶問題檢索CBETA佛教經典，返回經文與標準引用。"
 )
 
-# System Prompt
-SYSTEM_PROMPT = """
-你是「菩薩小老師」，一位融合佛教唯識學與菩薩道智慧的慈悲導師。你的目標是協助使用者透過觀照習氣、認識因果、發菩提心，逐步建立出離心、悲願心，進而實踐佛法於生活中。並基於用戶的需求使用工具來回答問題和執行任務。
---
-History:
-{history}
-CBETA DATA:
-{cbeta_context}
---
-引用經典原則：
-1. 引用經典時，必須以完整段落呈現，不可斷章取義或片段裁剪
-2. 引用時必須標明經典出處
-3. 不可改變經文原意或用自己的話重新詮釋經文
+def get_agent(openai_api_key: str, user_id: Optional[str] = None):
+    """创建一个配置好的LangChain代理，使用CBETA工具"""
+    # 系统提示词基本模板
+    system_message_template = """你是"菩薩小老師"，一位博学的佛法顾问，遵循以下原则：
 
-請根據以下的內容使用以下原則與任務進行回應與引導：
-（這裡可插入你給的所有規則與結構）
+1. 清晰易懂：用简单的现代语言解释佛法概念，避免晦涩的专业术语。
+2. 慈悲为怀：以平等之心对待所有问题，不带评判。
+3. 实用建议：提供具体、可行的建议，而非抽象理论。
+4. 历史准确：确保所有引用的经文和历史信息准确无误。
+5. 避免宣扬迷信：不传播未经证实的迷信或神秘说法。
+
+你的回應應該簡潔明瞭、貼近生活實際，並在適當時引用經典原文佐證。避免使用過於學術化的語言，確保一般大眾能夠理解。
+
+你可以使用CBETA工具來查詢佛教經典中的內容，幫助提供更準確的回答。
 """
 
-def get_agent(openai_api_key: str, user_id: str):
-    memory = ConversationBufferMemory(memory_key="history", return_messages=True)
-    llm = ChatOpenAI(temperature=0.3, openai_api_key=openai_api_key)
-    prompt = ChatPromptTemplate.from_messages([
-        SystemMessagePromptTemplate.from_template(SYSTEM_PROMPT),
-        MessagesPlaceholder(variable_name="history"),
-    ])
-    agent = initialize_agent(
-        tools=[cbeta_tool],
-        llm=llm,
-        agent="chat-conversational-react-description",
-        memory=memory,
-        verbose=True,
-        handle_parsing_errors=True,
-        agent_kwargs={"system_message": SYSTEM_PROMPT}
+    # 添加用户上下文（如果有用户ID）
+    if user_id:
+        user_context = get_user_context(user_id)
+        if user_context:
+            # 格式化上下文信息
+            context_info = f"""
+用户信息：
+- 修行经验：{user_context.get('practice_history', '未知')}
+- 兴趣领域：{', '.join(user_context.get('interests', ['一般佛法']))}
+- 提及过的主题：{', '.join(user_context.get('mentions', []))}
+
+最近对话历史：
+{get_recent_messages_for_context(user_id)}
+"""
+            system_message_template += context_info
+
+    # 初始化语言模型
+    llm = ChatOpenAI(
+        model="gpt-4-turbo", 
+        temperature=0.7,
+        openai_api_key=openai_api_key
     )
-    return agent
+    
+    # 初始化CBETA检索工具
+    cbeta_retriever = CBETARetriever()
+    tools = [cbeta_retriever]
+    
+    # 创建提示模板
+    prompt = ChatPromptTemplate.from_messages([
+        ("system", system_message_template),
+        MessagesPlaceholder(variable_name="chat_history", optional=True),
+        ("human", "{input}")
+    ])
+    
+    # 创建代理
+    agent = create_openai_tools_agent(llm, tools, prompt)
+    
+    # 创建代理执行器
+    agent_executor = AgentExecutor(
+        agent=agent,
+        tools=tools,
+        verbose=True,
+        # 禁用内存组件，我们将手动管理聊天历史
+        handle_parsing_errors=True
+    )
+    
+    # 包装函数，处理聊天历史
+    def agent_with_chat_history(user_input, chat_history=None):
+        try:
+            # 准备输入
+            inputs = {"input": user_input}
+            
+            # 如果有聊天历史，添加到输入
+            if chat_history:
+                inputs["chat_history"] = chat_history
+                
+            # 执行代理
+            result = agent_executor.invoke(inputs)
+            return result.get("output", "我现在无法回答，请稍后再试。")
+        except Exception as e:
+            logger.error(f"Agent执行错误: {e}", exc_info=True)
+            return "抱歉，我目前遇到了一些技术问题。请稍后再试。"
+    
+    return agent_with_chat_history
