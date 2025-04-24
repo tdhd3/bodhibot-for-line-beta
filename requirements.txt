@@ -1,0 +1,10 @@
+flask
+line-bot-sdk
+langchain
+openai
+tiktoken
+chromadb
+sentence-transformers
+requests
+python-dotenv
+feedparser
